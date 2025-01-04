@@ -823,4 +823,22 @@ public void testBug485477() {
 		"Syntax error, insert \". Identifier\" to complete Expression\n" +
 		"----------\n");
 }
+public void testIssue1330() {
+	runNegativeTest(
+		new String[] {
+			"T.java",
+			"import java.io.File;" +
+			"public class T {\n" +
+			"  private  void indexOfOfBounds() {\n" +
+			"    new File(\"\").listFiles(File::isDirectory)\n" +
+			"}}\n"
+		},
+		"----------\n" +
+		"1. ERROR in T.java (at line 3)\n" +
+		"	new File(\"\").listFiles(File::isDirectory)\n" +
+		"	                                        ^\n" +
+		"Syntax error, insert \";\" to complete BlockStatements\n" +
+		"----------\n"
+		);
+}
 }
